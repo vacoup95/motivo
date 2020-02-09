@@ -12,13 +12,11 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 1)->create()->each(function () {
-            return [
-                'name' => 'Motivo',
-                'email' => 'welkom@motivo.nl',
-                'password' => Hash::make('Test123'),
-                'email_verified_at' => now(),
-            ];
-        });
+        factory(App\User::class)->create([
+            'name' => 'Motivo',
+            'email' => 'welkom@motivo.nl',
+            'password' => Hash::make('Test123'),
+            'email_verified_at' => now(),
+        ]);
     }
 }
