@@ -21,3 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('groups', 'GroupController');
 Route::resource('users', 'UserGroupController');
 Route::resource('credentials', 'CredentialController');
+Route::resource('group-credentials', 'GroupCredentialController');

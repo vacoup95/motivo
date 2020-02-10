@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Group;
+use App\GroupCredential;
 use App\Repositories\Interfaces\IGroupRepository;
 use App\User;
 use Illuminate\Support\Facades\Auth;
