@@ -4,21 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GroupStoreRequest;
 use App\Http\Requests\GroupUpdateRequest;
+use App\Repositories\Interfaces\IGroupCredentialRepository;
 use App\Repositories\Interfaces\IGroupRepository;
-use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Store a newly created group in storage.
      *
@@ -37,13 +27,14 @@ class GroupController extends Controller
      *
      * @param  int $id
      * @param IGroupRepository $group
+     * @param IGroupCredentialRepository $groupCredential
      * @return \Illuminate\Http\Response
      */
-    public function show($id, IGroupRepository $group)
+    public function show($id, IGroupRepository $group, IGroupCredentialRepository $groupCredential)
     {
-
         return view('groups.show', [
-            'group' => $group->get($id)
+            'group' => $group->get($id),
+            'groupCredentials' => $groupCredential->getCredentials($id)
         ]);
     }
 
@@ -51,7 +42,7 @@ class GroupController extends Controller
     /**
      * Update the group
      *
-     * @param Request $request
+     * @param GroupUpdateRequest $request
      * @param $id
      * @param IGroupRepository $group
      * @return \Illuminate\Http\RedirectResponse

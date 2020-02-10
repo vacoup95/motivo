@@ -16,6 +16,59 @@
             @endif
             <div class="col-md-8">
                 <div class="card">
+                    <div class="card-header">Create group credentials</div>
+                    <div class="card-body">
+                        <form action="{{ route('group-credentials.store', ['group_id' => request()->group]) }}" method="post" accept-charset="UTF-8">
+                            <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                            <div class="form-group">
+                                <label for="credential_title"><b>Title</b></label>
+                                <input type="text" name="title" id="credential_title" placeholder="Shared Netflix account" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="credential_username"><b>Username</b> (optional)</label>
+                                <input type="text" name="username" id="credential_username" maxlength="255" placeholder="Username or email" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="credential_password"><b>Password</b></label>
+                                <input type="password" name="password" id="credential_password" maxlength="255" placeholder="Password" class="form-control" />
+                            </div>
+                            <button class="btn btn-primary">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 mt-4">
+                <div class="card">
+                    <div class="card-header">Group vault</div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            @foreach($groupCredentials as $vaultItem)
+                                <li class="list-group-item">
+                                    <a href="{{ route('group-credentials.show', $vaultItem->id) }}">
+                                        Manage {{ $vaultItem->title }}
+                                    </a>
+                                    @if($vaultItem->username !== null)
+                                        <p class="m-0">{{ $vaultItem->username }}</p>
+                                    @endif
+                                    <div class="form-inline">
+                                        <div class="form-group mb-2">
+                                            <input type="password" readonly class="form-control mr-2" id="show_password__{{ $vaultItem->id }}" value="{{ $vaultItem->password }}">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mb-2 show-password" data-id="{{ $vaultItem->id }}">Show password</button>
+                                    </div>
+                                    <form action="{{ route('group-credentials.destroy', $vaultItem->id) }}" method="post" accept-charset="UTF-8">
+                                        @method('DELETE')
+                                        <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                    </form>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 mt-4">
+                <div class="card">
                     <div class="card-header">Update Group</div>
                     <div class="card-body">
                         <form action="{{ route('groups.update', $group->id) }}" method="post" accept-charset="UTF-8">
