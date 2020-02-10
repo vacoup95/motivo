@@ -2,10 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Symfony\Component\Console\Input\Input;
 
 class GroupRemoveUserRequest extends FormRequest
 {

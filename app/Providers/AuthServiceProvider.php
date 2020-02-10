@@ -13,25 +13,22 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $policies = [
-        // example policy
-    ];
+    protected $policies = [];
 
     /**
      * Register any authentication / authorization services.
      *
+     * @param GateContract $gate
      * @return void
      */
     public function boot(GateContract $gate)
     {
         $this->registerPolicies($gate);
-
         $gate->define('destroy-user-from-group', function ($user) {
             if ($user === null || !isset(request()->group) || User::find($user->id)->groups()->where('group_id', request()->group)->count() === 0) {
                 return false;
             }
             return true;
         });
-
     }
 }
