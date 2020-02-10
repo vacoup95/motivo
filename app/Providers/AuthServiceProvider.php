@@ -30,5 +30,13 @@ class AuthServiceProvider extends ServiceProvider
             }
             return true;
         });
+
+        $gate->define('store', function ($user) {
+            if ($user === null || User::find($user->id)->id !== Auth()->user()->id) {
+                return false;
+            }
+            return true;
+        });
+
     }
 }

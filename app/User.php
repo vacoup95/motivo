@@ -45,4 +45,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Group', 'user_group');
     }
+
+    /**
+     * Retrieve credentials that belong to user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function credentials()
+    {
+        return $this->belongsToMany('App\Credential', 'user_credential');
+    }
 }

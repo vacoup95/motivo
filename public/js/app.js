@@ -49527,6 +49527,8 @@ var app = new Vue({
   el: '#app'
 });
 
+__webpack_require__(/*! ./reveal_password.js */ "./resources/js/reveal_password.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -49640,6 +49642,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/reveal_password.js":
+/*!*****************************************!*\
+  !*** ./resources/js/reveal_password.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var passwordButton = document.getElementsByClassName('show-password');
+
+var myFunction = function myFunction(e) {
+  e.preventDefault();
+  var id = this.getAttribute("data-id");
+  var type = document.getElementById('show_password__' + id).type;
+
+  if (type == 'text') {
+    document.getElementById('show_password__' + id).type = 'password';
+  } else {
+    document.getElementById('show_password__' + id).type = 'text';
+  }
+
+  if (this.innerHTML == 'Hide password') {
+    this.innerHTML = 'Show password';
+  } else {
+    this.innerHTML = 'Hide password';
+  }
+};
+
+for (var i = 0; i < passwordButton.length; i++) {
+  passwordButton[i].addEventListener('click', myFunction, false);
+}
 
 /***/ }),
 

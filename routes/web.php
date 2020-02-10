@@ -20,3 +20,4 @@ Auth::routes(['register' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('groups', 'GroupController');
 Route::resource('users', 'UserGroupController');
+Route::resource('credentials', 'CredentialController');
