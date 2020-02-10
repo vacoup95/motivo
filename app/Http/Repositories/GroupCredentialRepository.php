@@ -19,7 +19,7 @@ class GroupCredentialRepository implements IGroupCredentialRepository
             'title' => $request->title,
             'username' => $request->username ?? '',
             'password' => Crypt::encryptString($request->password),
-            'group_id' => $request->group_id,
+            'group_id' => $request->group,
         ]);
     }
 

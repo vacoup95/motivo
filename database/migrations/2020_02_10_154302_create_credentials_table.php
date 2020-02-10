@@ -19,7 +19,7 @@ class CreateCredentialsTable extends Migration
             $table->string('username')->nullable();
             $table->bigInteger('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('password');
+            $table->text('password');
             $table->timestamps();
         });
     }

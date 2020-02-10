@@ -19,7 +19,7 @@ class CreateGroupCredentialsTable extends Migration
             $table->string('username')->nullable();
             $table->bigInteger('group_id')->unsigned()->index();
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
-            $table->string('password');
+            $table->text('password');
             $table->timestamps();
         });
     }

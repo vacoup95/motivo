@@ -18,8 +18,9 @@
                 <div class="card">
                     <div class="card-header">Create group credentials</div>
                     <div class="card-body">
-                        <form action="{{ route('group-credentials.store', ['group_id' => request()->group]) }}" method="post" accept-charset="UTF-8">
+                        <form action="{{ route('group-credentials.store') }}" method="post" accept-charset="UTF-8">
                             <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                            <input name="group" type="hidden" value="{{ request()->group }}"/>
                             <div class="form-group">
                                 <label for="credential_title"><b>Title</b></label>
                                 <input type="text" name="title" id="credential_title" placeholder="Shared Netflix account" class="form-control" />

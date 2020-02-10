@@ -4,6 +4,8 @@ namespace App\Http;
 
 use App\Http\Middleware\CheckCredentialBelongsToUser;
 use App\Http\Middleware\CheckGroupBelongsToUser;
+use App\Http\Middleware\CheckIfUserMayStore;
+use App\Http\Middleware\CheckUserIsAuthUser;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -64,6 +66,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'user.credential' => CheckCredentialBelongsToUser::class,
+        'user.credential.store' => CheckIfUserMayStore::class,
+        'user.profile' => CheckUserIsAuthUser::class,
         'user.group' => CheckGroupBelongsToUser::class,
     ];
 
