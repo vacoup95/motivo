@@ -14,7 +14,8 @@ class CredentialController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('user.credential')->only(['destroy', 'show', 'update']);
+        $this->middleware('user.credential')->except('store');
+        $this->middleware('user.credential.store')->only('store');
     }
 
     /**

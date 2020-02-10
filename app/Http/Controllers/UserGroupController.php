@@ -9,23 +9,25 @@ use App\Repositories\Interfaces\IGroupRepository;
 
 class UserGroupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     */
-    public function index()
+
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
+        $this->middleware('user.profile')->except('store', 'destroy');
+        $this->middleware('user.group')->only('store', 'destroy');
     }
 
     /**
      * @param AddUserToGroupRequest $request
      * @param IGroupRepository $group
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(AddUserToGroupRequest $request, IGroupRepository $group)
     {
         $group->addUser($request->email, $request->group);
+        return Redirect()->back();
     }
+
 
     /**
      * Display the specified resource.
@@ -40,7 +42,6 @@ class UserGroupController extends Controller
             'vault' => $credential->userVault($id)
         ]);
     }
-
 
     /**
      * Update the group

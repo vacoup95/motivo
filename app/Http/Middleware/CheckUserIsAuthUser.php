@@ -2,17 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Repositories\Interfaces\ICredentialRepository;
 use Closure;
 
-class CheckCredentialBelongsToUser
+class CheckUserIsAuthUser
 {
-    private $credential;
-
-    public function __construct(ICredentialRepository $credential)
-    {
-        $this->credential = $credential;
-    }
     /**
      * Handle an incoming request.
      *
@@ -22,9 +15,8 @@ class CheckCredentialBelongsToUser
      */
     public function handle($request, Closure $next)
     {
-        $userId = Auth()->user()->id;
-
-        if($this->credential->belongsTo($userId, $request->credential)) {
+        $user = Auth()->user();
+        if($request->user == $user->id) {
             return $next($request);
         }
         return Redirect()->back();
