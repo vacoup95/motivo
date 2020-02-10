@@ -64,7 +64,7 @@
                                 @method('DELETE')
                                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                                 <button class="btn btn-sm btn-outline-danger">Delete</button>
-                                <span>Vault creation date: <i>{{ $group->created_at->format('d-m-Y') }}</i> Members: <i>{{ count($group->users()->get()) }}</i></span>
+                                <span>Vault creation date: <i>{{ $group->created_at->diffForhumans() }}</i> Members: <i>{{ count($group->users()->get()) }}</i></span>
                             </form>
                         </li>
                     @endforeach
