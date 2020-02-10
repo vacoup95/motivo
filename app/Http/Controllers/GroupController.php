@@ -10,6 +10,15 @@ use App\Repositories\Interfaces\IGroupRepository;
 class GroupController extends Controller
 {
     /**
+     * CredentialController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('user.group');
+    }
+
+    /**
      * Store a newly created group in storage.
      *
      * @param GroupStoreRequest $request
