@@ -15,13 +15,13 @@ class GroupController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('user.group');
+        $this->middleware('user.group')->except('store');
     }
 
     /**
      * Store a newly created group in storage.
      *
-     * @param GroupStoreRequest $request
+     * @param GroupStoreRequest $requestgit sta
      * @param IGroupRepository $group
      * @return \Illuminate\Http\RedirectResponse
      */
