@@ -8,17 +8,15 @@ class Group extends Model
 {
     protected $fillable = [
         'id',
-        'group_id',
-        'user_id'
+        'name',
+        'description'
     ];
 
     /**
      * Retrieves users that belong to group
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User', 'user_group');
     }
 }

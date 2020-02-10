@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GroupStoreRequest extends FormRequest
+class AddUserToGroupRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class GroupStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|min:1|max:254',
-            'description' => 'min:1|max:254',
+            'email' => 'required|email|exists:users|max:254'
         ];
     }
 }

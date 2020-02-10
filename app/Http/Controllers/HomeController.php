@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Interfaces\IUserRepository;
 use App\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -20,10 +21,14 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
+     * @param IUserRepository $user
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(IUserRepository $user)
     {
-        return view('home');
+        $groups = $user->groups(User::find(Auth::user()->id));
+        return view('home', [
+            'groups' => $groups,
+        ]);
     }
 }

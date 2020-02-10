@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GroupStoreRequest;
+use App\Http\Requests\GroupUpdateRequest;
 use App\Repositories\Interfaces\IGroupRepository;
 use Illuminate\Http\Request;
 
@@ -23,54 +24,54 @@ class GroupController extends Controller
      *
      * @param GroupStoreRequest $request
      * @param IGroupRepository $group
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(GroupStoreRequest $request, IGroupRepository $group)
     {
         $group->store($request);
+        return Redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     * @param IGroupRepository $group
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, IGroupRepository $group)
     {
-        //
+
+        return view('groups.show', [
+            'group' => $group->get($id)
+        ]);
+    }
+
+
+    /**
+     * Update the group
+     *
+     * @param Request $request
+     * @param $id
+     * @param IGroupRepository $group
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(GroupUpdateRequest $request, $id, IGroupRepository $group)
+    {
+        $group->update($request->input(), $id);
+        return Redirect()->back();
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Removes the group resource
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @param IGroupRepository $group
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function edit($id)
+    public function destroy($id, IGroupRepository $group)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $group->destroy($id);
+        return Redirect()->back();
     }
 }
